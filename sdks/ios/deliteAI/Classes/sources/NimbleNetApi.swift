@@ -7,16 +7,42 @@
 import Foundation
 import SwiftProtobuf
 
+/// The main entry point for the NimbleNet iOS SDK.
+///
+/// `NimbleNetApi` provides a high-level interface for integrating machine learning capabilities
+/// and event tracking into your iOS applications. This class manages the SDK's lifecycle,
+/// including initialization, session management, running inference on machine learning models,
+/// and recording user events.
+///
+/// Developers use `NimbleNetApi` to:
+/// - **Initialize the SDK**: Configure the SDK with necessary credentials and settings.
+/// - **Manage Sessions**: Control the active session for event tracking and model interactions.
+/// - **Run Machine Learning Models**: Execute pre-trained models with custom inputs to get predictions or insights.
+/// - **Add Events**: Track user interactions and other relevant data for analytics or model improvement.
+/// - **Check Readiness**: Determine if the SDK and its underlying models are ready for operations.
+///
+/// This class abstracts away the complexities of model loading, data handling, and native
+/// interoperability, providing a clean and consistent API for mobile developers.
 public class NimbleNetApi{
     
     private static let nimbleNetController: NimbleNetController = NimbleNetController();
     
+    /// Restarts the current session.
     public static func restartSession(){
         nimbleNetController.restartSession()
     }
+
+    /// Restarts the session with a specific session identifier.
+    /// - Parameter sessionId: The ID for the new session.
     public static func restartSessionWithId(sessionId: String){
         nimbleNetController.restartSession(withId: sessionId)
     }
+
+    /// Initializes the NimbleNet SDK with the provided configuration.
+    /// - Parameters:
+    ///   - config: The configuration object.
+    ///   - assetsJson: Optional JSON array for asset configuration.
+    /// - Returns: A `NimbleNetResult<Void>` indicating success or failure.
     public static func initialize(config:NimbleNetConfig, assetsJson: [[String: Any]]? = nil)->NimbleNetResult<Void>{
         
         var config = config
@@ -64,6 +90,11 @@ public class NimbleNetApi{
         
     }
     
+    /// Initializes the NimbleNet SDK with a JSON string configuration.
+    /// - Parameters:
+    ///   - config: The configuration as a JSON string.
+    ///   - assetsJson: Optional JSON array for asset configuration.
+    /// - Returns: A `NimbleNetResult<Void>` indicating success or failure.
     public static func initialize(config:String, assetsJson: [[String: Any]]?) -> NimbleNetResult<Void>{
         
         if let jsonData = config.data(using: .utf8) {
@@ -83,6 +114,11 @@ public class NimbleNetApi{
         }
     }
         
+    /// Adds an event with dictionary-based data.
+    /// - Parameters:
+    ///   - events: A dictionary containing event data.
+    ///   - eventType: The type of event.
+    /// - Returns: A `NimbleNetResult<UserEventdata>` with the result of adding the event.
     public static func addEvent(events: [String: Any], eventType: String) -> NimbleNetResult<UserEventdata> {
         
         do {
@@ -100,12 +136,19 @@ public class NimbleNetApi{
         }
     }
     
+    /// Adds an event with a JSON string payload.
+    /// - Parameters:
+    ///   - eventString: The event data as a JSON string.
+    ///   - eventType: The type of event.
+    /// - Returns: A `NimbleNetResult<UserEventdata>` with the result of adding the event.
     public static func addEvent(eventString: String, eventType: String) -> NimbleNetResult<UserEventdata> {
         let res = nimbleNetController.add_event_controller(eventString, eventType:eventType)!
         return NimbleNetResult<UserEventdata>(data: NSDictionary(dictionary:res))
 
     }
-  
+    
+    /// Checks if the NimbleNet SDK is ready.
+    /// - Returns: A `NimbleNetResult<Unit>` indicating the readiness status.
     public static func isReady() -> NimbleNetResult<Unit>
     {
         do{
@@ -118,6 +161,11 @@ public class NimbleNetApi{
         }
     }
     
+    /// Runs a specified method with provided inputs.
+    /// - Parameters:
+    ///   - methodName: The name of the method to run.
+    ///   - inputs: A dictionary of input tensors.
+    /// - Returns: A `NimbleNetResult<NimbleNetOutput>` containing the method's output.
     public static func runMethod(methodName: String, inputs: [String: NimbleNetTensor]) -> NimbleNetResult<NimbleNetOutput> {
         
         do {
@@ -180,7 +228,7 @@ public class NimbleNetApi{
         func convertToDictionary(_ input: NimbleNetTensor) -> [String: Any] {
             if(input.datatype.rawValue == DataType.FE_OBJ.rawValue){
                 var message = input.data as! (Message & _ProtoNameProviding)
-                 var wrapper = ProtoObjectWrapper(message: message)
+                var wrapper = ProtoObjectWrapper(message: message)
                 return [
                     "data": wrapper,
                     "type": input.datatype.value,
@@ -197,6 +245,8 @@ public class NimbleNetApi{
     }
 
     //utils
+    /// Creates the NimbleNet SDK directory.
+    /// - Returns: The path to the created directory.
     private static func createNimbleNetDirectory() -> String {
         guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             fatalError("Failed to get documents directory.")
@@ -215,6 +265,9 @@ public class NimbleNetApi{
         return folderURL.path
     }
     
+    /// Converts a value to an `UnsafeMutableRawPointer`.
+    /// - Parameter value: The value to convert.
+    /// - Returns: An `UnsafeMutableRawPointer` to the value.
     private static func convertToVoidPointer<T>(_ value: T) -> UnsafeMutableRawPointer {
         let pointer = UnsafeMutablePointer<T>.allocate(capacity: 1)
         pointer.initialize(to: value)
@@ -222,6 +275,11 @@ public class NimbleNetApi{
     }
     
     
+    /// Populates a `NimbleNetResult` with error information.
+    /// - Parameters:
+    ///   - errorCode: The error code.
+    ///   - errorMessage: The error message.
+    /// - Returns: A `NimbleNetResult<T>` with error details.
     private static func populateNimbleNetResultWithError<T>(errorCode:Int,errorMessage:String) -> NimbleNetResult<T>{
         let dict: NSDictionary = [
             "status": false,
@@ -236,7 +294,9 @@ public class NimbleNetApi{
     
 }
 
-
+/// Verifies the types and shapes of user-provided inputs for model execution.
+/// - Parameter inputs: A dictionary of input tensors to verify.
+/// - Throws: `DataTypeMismatchError` if any input data type or shape is invalid.
 func verifyUserInputs(inputs: [String: NimbleNetTensor]) throws {
     for (_, modelInput) in inputs {
         let data = modelInput.data
