@@ -7,10 +7,10 @@ To build the **DeliteAI iOS SDK** locally and run tests, follow these steps:
 To effectively test and observe the functionalities of the DeliteAI iOS SDK locally, you can utilize the provided `NimbleNetExample` application. Follow these detailed steps to get it up and running:
 
 1.  **Install Third-Party Binaries:**
-    Run the following command from the **ROOT of the repo** to download all the required dependencies:
+    Run the following command to download all the required dependencies:
 
     ```bash
-    $GIT_ROOT/setup.sh --sdk ios
+    cd $(git rev-parse --show-toplevel) && ./setup.sh --sdk ios
     ```
 
 1.  **Build NimbleNet.xcframework:**
@@ -23,7 +23,7 @@ To effectively test and observe the functionalities of the DeliteAI iOS SDK loca
     Build the `NimbleNet.xcframework` by running the following command from the project's root directory:
 
     ```bash
-    $GIT_ROOT/sdk/ios/script/build-deliteAI-static.sh
+    cd $(git rev-parse --show-toplevel) && ./sdk/ios/script/build-deliteAI-static.sh
     ```
 
 1.  **Install Dependencies via CocoaPods:**
