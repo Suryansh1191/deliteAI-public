@@ -13,7 +13,7 @@ To effectively test and observe the functionalities of the DeliteAI iOS SDK loca
     $GIT_ROOT/setup.sh --sdk ios
     ```
 
-2.  **Build NimbleNet.xcframework:**
+1.  **Build NimbleNet.xcframework:**
     This command requires **CMake** to be installed on your machine. If you don't have CMake, you can install it using Homebrew:
 
     ```bash
@@ -26,7 +26,7 @@ To effectively test and observe the functionalities of the DeliteAI iOS SDK loca
     $GIT_ROOT/sdk/ios/script/build-deliteAI-static.sh
     ```
 
-3.  **Install Dependencies via CocoaPods:**
+1.  **Install Dependencies via CocoaPods:**
     Run the following commands to fetch all necessary dependencies - including the DeliteAI iOS SDK itself from your local code which will ensure that you're testing against your current development version.
 
     ```bash
@@ -34,17 +34,17 @@ To effectively test and observe the functionalities of the DeliteAI iOS SDK loca
     pod install
     ```
 
-4.  **Open the Xcode Workspace:**
+1.  **Open the Xcode Workspace:**
     Once the `pod install` command completes successfully, open the generated Xcode workspace file. It's crucial to open the `.xcworkspace` file, not the `.xcodeproj` file, to ensure all pods are correctly linked.
 
     ```bash
     open NimbleNetExample.xcworkspace
     ```
 
-5.  **Select the Target:**
+1.  **Select the Target:**
     In Xcode, ensure that `NimbleNetExample` is selected as the active target for compilation and running. You can find this dropdown menu next to the play/stop buttons in the Xcode toolbar.
 
-6.  **Build and Run the Application:**
+1.  **Build and Run the Application:**
     With the target selected, click the **Run** (play) button in Xcode. Choose your desired simulator or a connected iOS device. As the app runs, closely observe the **Debug Area**. This output will help you verify the core functionalities of the SDK.
 
 
