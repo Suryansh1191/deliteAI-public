@@ -23,7 +23,7 @@ To effectively test and observe the functionalities of the DeliteAI iOS SDK loca
     Build the `NimbleNet.xcframework` by running the following command from the project's root directory:
 
     ```bash
-    cd $(git rev-parse --show-toplevel) && ./sdk/ios/script/build-deliteAI-static.sh
+    cd $(git rev-parse --show-toplevel) && ./sdks/ios/script/build-deliteAI-static.sh
     ```
 
 1.  **Install Dependencies via CocoaPods:**
