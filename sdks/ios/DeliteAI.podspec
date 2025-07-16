@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
   # Basic Information
   s.name             = 'DeliteAI'
-  s.version          = '0.0.1-local'
+  s.version          = '0.0.2-local'
   s.summary          = 'On-Device AI platform for creating delightful experiences with agentic workflows.'
 
   s.description      = <<-DESC
