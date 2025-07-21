@@ -58,9 +58,12 @@ std::shared_ptr<CharStream> ExecutorchLLMExecutor::run_prompt(const std::string&
 }
 
 void ExecutorchLLMExecutor::run_inference(const std::string& prompt) {
+  LOG_TO_CLIENT_ERROR("deliteAI logs ->>> Got promt from user %s", prompt.c_str());
   std::shared_ptr<int> numOfTokens = std::make_shared<int>(0);
   std::function<void(const std::string&)> token_callback = [this,
                                                             numOfTokens](const std::string& piece) {
+    LOG_TO_CLIENT_ERROR("deliteAI logs ->>> Got token from LLM %s, number of tokens: %d", piece.c_str(), *numOfTokens);
+
     if (*numOfTokens >= _maxTokensToGenerate) {
       mark_end_of_stream();
       return;
@@ -85,14 +88,18 @@ void ExecutorchLLMExecutor::run_inference(const std::string& prompt) {
         .seq_len = _executorConfig.maxInputNumTokens,
         .temperature = _temperature,
     };
+    LOG_TO_CLIENT_ERROR("deliteAI logs ->>> generate called");
     auto status = _runner->generate(prompt, config, token_callback, {});
+    LOG_TO_CLIENT_ERROR("deliteAI logs ->>> generate return");
     if (status != ::executorch::runtime::Error::Ok) {
+      LOG_TO_CLIENT_ERROR("deliteAI logs ->>> marking end of stream");
       mark_end_of_stream();
-      LOG_TO_CLIENT_ERROR("Error while running inference on LLM using executorch.");
+      LOG_TO_CLIENT_ERROR("deliteAI logs ->>> Error while running inference on LLM using executorch.");
     }
   } catch (const std::exception& e) {
+    LOG_TO_CLIENT_ERROR("deliteAI logs ->>> Catch called for 101");
     mark_end_of_stream();
-    LOG_TO_CLIENT_ERROR("Error: %s while running inference on LLM using executorch.", e.what());
+    LOG_TO_CLIENT_ERROR("deliteAI logs ->>> Error: %s while running inference on LLM using executorch.", e.what());
   }
 }
 
