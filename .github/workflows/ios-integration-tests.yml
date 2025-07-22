@@ -1,8 +1,10 @@
 name: Run iOS Instrumentation Tests on macos-14
 
 on:
-  pull_request_target:
-    types: [labeled, synchronize]
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
   workflow_dispatch: 
 
 
