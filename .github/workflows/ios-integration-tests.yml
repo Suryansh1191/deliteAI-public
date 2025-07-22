@@ -1,7 +1,11 @@
 name: Run iOS Instrumentation Tests on macos-14
 
 on:
-  workflow_dispatch: 
+  push:
+    branches:
+      - ios-work-flow
+    paths:
+      - '.github/workflows/**'
 
 
 jobs:
