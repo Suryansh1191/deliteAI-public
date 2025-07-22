@@ -43,3 +43,6 @@ deliteAI/Assets/nimblenet.xcframework
 Ss
 # Other
 .DS_Store
+
+# Secrets
+example/Secrets.xcconfig

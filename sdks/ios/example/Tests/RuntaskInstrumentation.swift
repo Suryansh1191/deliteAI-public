@@ -17,7 +17,15 @@ class runMethodInstrumentation: XCTestCase {
         
         let context = UIApplication.shared.delegate as! UIApplicationDelegate
  
-        let config = NimbleNetConfig(clientId: "testclient", clientSecret: BundleConfig.clientSecret, host: BundleConfig.host, deviceId: "nimon", debug: true, compatibilityTag: "android-output-verification", online: true)
+        let config = NimbleNetConfig(
+            clientId: BundleConfig.clientId,
+            clientSecret: BundleConfig.clientSecret,
+            host: BundleConfig.host,
+            deviceId: "nimon",
+            debug: true,
+            compatibilityTag: "android-output-verification",
+            online: true
+        )
         
         let res = NimbleNetApi.initialize(config: config)
         sleep(2)

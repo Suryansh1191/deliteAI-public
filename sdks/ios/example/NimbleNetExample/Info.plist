@@ -35,5 +35,11 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
+    <key>CLIENT_SECERT</key>
+    <string>$(CLIENT_SECERT)</string>
+    <key>CLIENT_ID</key>
+    <string>$(CLIENT_ID)</string>
+    <key>HOST_URL</key>
+    <string>$(HOST_URL)</string>
 </dict>
 </plist>

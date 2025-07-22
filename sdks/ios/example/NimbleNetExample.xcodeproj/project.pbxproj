@@ -16,6 +16,8 @@
 		607FACEC1AFB9204008FA782 /* RuntaskInstrumentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* RuntaskInstrumentation.swift */; };
 		894C59422E164D8A001CF7CA /* BundleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894C59412E164D8A001CF7CA /* BundleConfig.swift */; };
 		894C59432E164EB2001CF7CA /* BundleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894C59412E164D8A001CF7CA /* BundleConfig.swift */; };
+		89709F012E302D0900AC6E95 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 89709F002E302D0900AC6E95 /* Secrets.xcconfig */; };
+		89709F022E302D0900AC6E95 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 89709F002E302D0900AC6E95 /* Secrets.xcconfig */; };
 		D9D1C4B790D0C04DF3A45FCD /* Pods_NimbleNetExample_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6ED17F51459EFD0732BE8D /* Pods_NimbleNetExample_Tests.framework */; };
 		F12F6B802D6F389900A17447 /* company_proto.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12F6B7F2D6F389900A17447 /* company_proto.pb.swift */; };
 		F145718C2D5DCE75008E3AA0 /* Keychaintest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145718B2D5DCE75008E3AA0 /* Keychaintest.swift */; };
@@ -61,10 +63,11 @@
 		607FACE51AFB9204008FA782 /* NimbleNetExample_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NimbleNetExample_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* RuntaskInstrumentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntaskInstrumentation.swift; sourceTree = "<group>"; };
+		891F40FE2E3032E70008F764 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = "/Users/nimbleedgeadmin/Desktop/NimbleEdge/folk/deliteAI-public/LICENSE"; sourceTree = "<absolute>"; };
 		894C59412E164D8A001CF7CA /* BundleConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleConfig.swift; sourceTree = "<group>"; };
 		894C59642E1818E4001CF7CA /* NimbleNetExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NimbleNetExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		89709EC52E1C537D00AC6E95 /* DeliteAI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = DeliteAI.podspec; path = ../DeliteAI.podspec; sourceTree = SOURCE_ROOT; };
-		89709EC82E1C53A300AC6E95 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = /Users/nimbleedgeadmin/Desktop/NimbleEdge/folk/deliteAI/LICENSE; sourceTree = "<absolute>"; };
+		89709F002E302D0900AC6E95 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		92ABF01D11C14E7EEC4B65A3 /* Pods-NimbleNetExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbleNetExample.release.xcconfig"; path = "Target Support Files/Pods-NimbleNetExample/Pods-NimbleNetExample.release.xcconfig"; sourceTree = "<group>"; };
 		9FCEA74EEEB0E964DAAA3EB5 /* Pods_NimbleNetExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NimbleNetExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6ED17F51459EFD0732BE8D /* Pods_NimbleNetExample_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NimbleNetExample_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +119,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				89709F002E302D0900AC6E95 /* Secrets.xcconfig */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* NimbleNetExample */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -180,7 +184,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				89709EC82E1C53A300AC6E95 /* LICENSE */,
+				891F40FE2E3032E70008F764 /* LICENSE */,
 				89709EC52E1C537D00AC6E95 /* DeliteAI.podspec */,
 				4F98A08D52D67F85C49C33B3 /* README.md */,
 			);
@@ -298,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89709F022E302D0900AC6E95 /* Secrets.xcconfig in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -308,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89709F012E302D0900AC6E95 /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +506,7 @@
 /* Begin XCBuildConfiguration section */
 		607FACED1AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89709F002E302D0900AC6E95 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -556,6 +563,7 @@
 		};
 		607FACEE1AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89709F002E302D0900AC6E95 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;

@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let config = NimbleNetConfig(
-            clientId: "testclient",
+            clientId: BundleConfig.clientId,
             clientSecret: BundleConfig.clientSecret,
             host: BundleConfig.host,
             deviceId: "hello-ios",
