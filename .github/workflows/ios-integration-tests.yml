@@ -99,7 +99,7 @@ jobs:
             -workspace NimbleNetExample.xcworkspace \
             -scheme NimbleNetExample_Tests \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 16e' \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.5' \
             -only-testing:NimbleNetExample_Tests/runMethodInstrumentation \
             test
 
