@@ -9,16 +9,16 @@ import SwiftProtobuf
 
 /// The main entry point for the NimbleNet iOS SDK.
 ///
-/// `NimbleNetApi` provides a high-level interface for integrating machine learning capabilities
-/// and event tracking into your iOS applications. This class manages the SDK's lifecycle,
-/// including initialization, session management, running inference on machine learning models,
-/// and recording user events.
+/// `NimbleNetApi` provides a high-level interface for integrating AI/ML capabilities
+/// and event processing into your iOS applications. This class manages the SDK's lifecycle,
+/// including initialization, session management, running local inference for AI/ML models,
+/// and processing user events.
 ///
-/// Developers use `NimbleNetApi` to:
+/// Developers can use `NimbleNetApi` to:
 /// - **Initialize the SDK**: Configure the SDK with necessary credentials and settings.
-/// - **Manage Sessions**: Control the active session for event tracking and model interactions.
-/// - **Run Machine Learning Models**: Execute pre-trained models with custom inputs to get predictions or insights.
-/// - **Add Events**: Track user interactions and other relevant data for analytics or model improvement.
+/// - **Manage Sessions**: Control the active session for event processing and model interactions.
+/// - **Run AI/ML Models**: Execute AI/ML models with custom inputs to get predictions or insights.
+/// - **Add Events**: Process user interactions and other relevant data for analytics or model improvement.
 /// - **Check Readiness**: Determine if the SDK and its underlying models are ready for operations.
 ///
 /// This class abstracts away the complexities of model loading, data handling, and native
@@ -41,7 +41,7 @@ public class NimbleNetApi{
     /// Initializes the NimbleNet SDK with the provided configuration.
     /// - Parameters:
     ///   - config: The configuration object.
-    ///   - assetsJson: Optional JSON array for asset configuration.
+    ///   - assetsJson: Optional JSON array for asset configuration. This is mandatory for offline initialization.
     /// - Returns: A `NimbleNetResult<Void>` indicating success or failure.
     public static func initialize(config:NimbleNetConfig, assetsJson: [[String: Any]]? = nil)->NimbleNetResult<Void>{
         
@@ -93,7 +93,7 @@ public class NimbleNetApi{
     /// Initializes the NimbleNet SDK with a JSON string configuration.
     /// - Parameters:
     ///   - config: The configuration as a JSON string.
-    ///   - assetsJson: Optional JSON array for asset configuration.
+    ///   - assetsJson: Optional JSON array for asset configuration. This is mandatory for offline initialization.
     /// - Returns: A `NimbleNetResult<Void>` indicating success or failure.
     public static func initialize(config:String, assetsJson: [[String: Any]]?) -> NimbleNetResult<Void>{
         
@@ -263,15 +263,6 @@ public class NimbleNetApi{
         }
         
         return folderURL.path
-    }
-    
-    /// Converts a value to an `UnsafeMutableRawPointer`.
-    /// - Parameter value: The value to convert.
-    /// - Returns: An `UnsafeMutableRawPointer` to the value.
-    private static func convertToVoidPointer<T>(_ value: T) -> UnsafeMutableRawPointer {
-        let pointer = UnsafeMutablePointer<T>.allocate(capacity: 1)
-        pointer.initialize(to: value)
-        return UnsafeMutableRawPointer(pointer)
     }
     
     

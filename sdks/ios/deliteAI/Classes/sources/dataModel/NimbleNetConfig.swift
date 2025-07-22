@@ -64,7 +64,7 @@ public struct NimbleNetConfig: Codable {
     /// - Parameters:
     ///   - clientId: Your unique client identifier from NimbleNet platform. Defaults to an empty string.
     ///   - clientSecret: Authentication secret key for API access. Defaults to an empty string.
-    ///   - host: The base URL of the NimbleNet platform API endpoint. Defaults to an empty string.
+    ///   - host: The base URL of the SaaS Configuration platform API endpoint. Defaults to an empty string.
     ///   - deviceId: Unique identifier for this device or application installation. Defaults to an empty string.
     ///   - debug: Enable debug mode for detailed logging and diagnostics. Defaults to `false`.
     ///   - compatibilityTag: Version identifier for API compatibility checking. Defaults to an empty string.
