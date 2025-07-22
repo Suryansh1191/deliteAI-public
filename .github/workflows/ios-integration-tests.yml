@@ -3,10 +3,12 @@ name: Run iOS Instrumentation Tests on macos-14
 on:
   pull_request_target:
     types: [labeled, synchronize]
+  workflow_dispatch: 
+
 
 jobs:
   test:
-    if: contains(github.event.pull_request.labels.*.name, 'ready-for-test')
+    # if: contains(github.event.pull_request.labels.*.name, 'ready-for-test')
     runs-on: macos-14
     permissions:
       contents: read
