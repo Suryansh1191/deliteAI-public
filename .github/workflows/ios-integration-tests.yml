@@ -1,5 +1,6 @@
 name: Run iOS Instrumentation Tests on macos-14
 
+# testing
 on:
   push:
     branches:
@@ -7,8 +8,14 @@ on:
     paths:
       - '.github/workflows/**'
 
+# on:
+#   pull_request_target:
+#     types: [labeled, synchronize]
+
+
 
 jobs:
+  # if: contains(github.event.pull_request.labels.*.name, 'ready-for-test')
   test:
     runs-on: macos-14
     permissions:
@@ -74,29 +81,30 @@ jobs:
         run: |
           xcrun simctl list devices available
 
-      - name: Build for Testing
-        working-directory: sdks/ios/example
+      - name: Configure iOS test Secrets.xcconfig
+        env:
+          iOS_TEST_CLIENT_ID: ${{ secrets.iOS_TEST_CLIENT_ID }}
+          iOS_TEST_CLIENT_SECRET: ${{ secrets.iOS_TEST_CLIENT_SECRET }}
+          iOS_TEST_HOST: ${{ secrets.iOS_TEST_HOST }}
         run: |
-          xcodebuild build-for-testing \
-            -workspace NimbleNetExample.xcworkspace \
-            -scheme NimbleNetExample \
-            -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.5' \
-            -configuration Debug \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO
+          echo "CLIENT_ID=$iOS_TEST_CLIENT_ID" >> sdks/iOS/example/Secrets.xcconfig
+          echo "CLIENT_SECERT=$iOS_TEST_CLIENT_SECRET" >> sdks/iOS/example/Secrets.xcconfig
+          echo "HOST_URL=$iOS_TEST_HOST" >> sdks/iOS/example/Secrets.xcconfig
 
-      - name: Run Unit Tests
+
+      - name: Run Test
         working-directory: sdks/ios/example
         run: |
-          xcodebuild test-without-building \
+          xcodebuild \
             -workspace NimbleNetExample.xcworkspace \
-            -scheme NimbleNetExample \
+            -scheme NimbleNetExample_Tests \
+            -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.5' \
-            -configuration Debug \
+            -only-testing:NimbleNetExample_Tests/runMethodInstrumentation \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
+            test
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
