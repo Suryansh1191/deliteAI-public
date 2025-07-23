@@ -42,6 +42,11 @@ std::shared_ptr<CharStream> ExecutorchLLMExecutor::run_prompt(const std::string&
   std::lock_guard<std::mutex> lock{_mutex};
 
   stop_inference_thread();
+  if (!_runner->is_loaded()) {
+      LOG_TO_CLIENT_ERROR("deliteAI logs ->>> LLM Runner is not loaded");
+      _runner->load();
+  }
+
   // Creating these variables again to drop ones used by previous inference
   _charStream = CharStream::construct();
   _internalQueue = std::make_shared<Queue>(_executorConfig.internalQueueSize);
@@ -62,13 +67,15 @@ void ExecutorchLLMExecutor::run_inference(const std::string& prompt) {
   std::shared_ptr<int> numOfTokens = std::make_shared<int>(0);
   std::function<void(const std::string&)> token_callback = [this,
                                                             numOfTokens](const std::string& piece) {
-    LOG_TO_CLIENT_ERROR("deliteAI logs ->>> Got token from LLM %s, number of tokens: %d", piece.c_str(), *numOfTokens);
+    LOG_TO_CLIENT_ERROR("deliteAI logs ->>> Got token from LLM: %s, number of tokens: %d", piece.c_str(), *numOfTokens);
 
     if (*numOfTokens >= _maxTokensToGenerate) {
+      LOG_TO_CLIENT_ERROR("deliteAI logs ->>> mark_end_of_stream called in line 73");
       mark_end_of_stream();
       return;
     }
     if (piece == _endOfTurnToken) {
+      LOG_TO_CLIENT_ERROR("deliteAI logs ->>> mark_end_of_stream called in line 78");
       mark_end_of_stream();
       return;
     }
@@ -76,6 +83,7 @@ void ExecutorchLLMExecutor::run_inference(const std::string& prompt) {
       if (c != '\0') {
         _internalQueue->push(c);
       } else {
+        LOG_TO_CLIENT_ERROR("deliteAI logs ->>> mark_end_of_stream called in line 86");
         mark_end_of_stream();
         return;
       }
@@ -85,10 +93,13 @@ void ExecutorchLLMExecutor::run_inference(const std::string& prompt) {
   try {
     executorch::extension::llm::GenerationConfig config{
         .echo = false,
-        .seq_len = _executorConfig.maxInputNumTokens,
         .temperature = _temperature,
     };
     LOG_TO_CLIENT_ERROR("deliteAI logs ->>> generate called");
+    if (!_runner->is_loaded()) {
+        LOG_TO_CLIENT_ERROR("deliteAI logs ->>> LLM Runner is not loaded");
+        _runner->load();
+    }
     auto status = _runner->generate(prompt, config, token_callback, {});
     LOG_TO_CLIENT_ERROR("deliteAI logs ->>> generate return");
     if (status != ::executorch::runtime::Error::Ok) {
