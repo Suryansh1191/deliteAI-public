@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		05F18F4E7DA2F25FC69CACCF /* Pods_NimbleNetExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FCEA74EEEB0E964DAAA3EB5 /* Pods_NimbleNetExample.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		607FACD81AFB9204008FA782 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ChatViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* RuntaskInstrumentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* RuntaskInstrumentation.swift */; };
 		894C59422E164D8A001CF7CA /* BundleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894C59412E164D8A001CF7CA /* BundleConfig.swift */; };
 		894C59432E164EB2001CF7CA /* BundleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894C59412E164D8A001CF7CA /* BundleConfig.swift */; };
+		89CD9EC02E36B62000BFAA23 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CD9EBF2E36B61D00BFAA23 /* MessageCell.swift */; };
 		D9D1C4B790D0C04DF3A45FCD /* Pods_NimbleNetExample_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6ED17F51459EFD0732BE8D /* Pods_NimbleNetExample_Tests.framework */; };
 		F12F6B802D6F389900A17447 /* company_proto.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12F6B7F2D6F389900A17447 /* company_proto.pb.swift */; };
 		F145718C2D5DCE75008E3AA0 /* Keychaintest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145718B2D5DCE75008E3AA0 /* Keychaintest.swift */; };
@@ -54,7 +55,7 @@
 		607FACD01AFB9204008FA782 /* NimbleNetExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NimbleNetExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		607FACD71AFB9204008FA782 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -65,6 +66,7 @@
 		894C59642E1818E4001CF7CA /* NimbleNetExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NimbleNetExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		89709EC52E1C537D00AC6E95 /* DeliteAI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = DeliteAI.podspec; path = ../DeliteAI.podspec; sourceTree = SOURCE_ROOT; };
 		89709EC82E1C53A300AC6E95 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = /Users/nimbleedgeadmin/Desktop/NimbleEdge/folk/deliteAI/LICENSE; sourceTree = "<absolute>"; };
+		89CD9EBF2E36B61D00BFAA23 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		92ABF01D11C14E7EEC4B65A3 /* Pods-NimbleNetExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbleNetExample.release.xcconfig"; path = "Target Support Files/Pods-NimbleNetExample/Pods-NimbleNetExample.release.xcconfig"; sourceTree = "<group>"; };
 		9FCEA74EEEB0E964DAAA3EB5 /* Pods_NimbleNetExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NimbleNetExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6ED17F51459EFD0732BE8D /* Pods_NimbleNetExample_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NimbleNetExample_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,10 +139,11 @@
 		607FACD21AFB9204008FA782 /* NimbleNetExample */ = {
 			isa = PBXGroup;
 			children = (
+				89CD9EBF2E36B61D00BFAA23 /* MessageCell.swift */,
 				894C59412E164D8A001CF7CA /* BundleConfig.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				F12F6B7F2D6F389900A17447 /* company_proto.pb.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				607FACD71AFB9204008FA782 /* ChatViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				894C59642E1818E4001CF7CA /* NimbleNetExample-Bridging-Header.h */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -449,7 +452,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				607FACD81AFB9204008FA782 /* ChatViewController.swift in Sources */,
+				89CD9EC02E36B62000BFAA23 /* MessageCell.swift in Sources */,
 				F12F6B802D6F389900A17447 /* company_proto.pb.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				894C59422E164D8A001CF7CA /* BundleConfig.swift in Sources */,
@@ -624,7 +628,7 @@
 					"$(SRCROOT)/Pods/**",
 				);
 				INFOPLIST_FILE = NimbleNetExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				ONLY_ACTIVE_ARCH = YES;
@@ -662,7 +666,7 @@
 					"$(SRCROOT)/Pods/**",
 				);
 				INFOPLIST_FILE = NimbleNetExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				ONLY_ACTIVE_ARCH = YES;
