@@ -119,7 +119,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private func setupStyle() {
         
         view.backgroundColor = .systemBackground
-        title = "NimbleNet Example"
+        title = "DeliteAI Example"
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
