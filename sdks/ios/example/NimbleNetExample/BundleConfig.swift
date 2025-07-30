@@ -8,5 +8,6 @@ import Foundation
 
 class BundleConfig {
     public static var clientSecret: String = Bundle.main.infoDictionary?["CLIENT_SECERT"] as? String ?? ""
-    public static var host: String = Bundle.main.infoDictionary?["HOST_URL"] as? String ?? ""
+    public static var host: String = "https://" + (Bundle.main.infoDictionary?["HOST_URL"] as? String ?? "")
+    public static var clientId: String = Bundle.main.infoDictionary?["CLIENT_ID"] as? String ?? ""
 }

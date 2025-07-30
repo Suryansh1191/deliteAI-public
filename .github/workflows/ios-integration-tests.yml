@@ -1,0 +1,114 @@
+name: Run iOS Instrumentation Tests on macos-14
+
+# testing
+on:
+  push:
+    branches:
+      - hk/ios_workflow
+    paths:
+      - '.github/workflows/**'
+
+# on:
+#   pull_request_target:
+#     types: [labeled, synchronize]
+
+
+
+jobs:
+  # if: contains(github.event.pull_request.labels.*.name, 'ready-for-test')
+  test:
+    runs-on: macos-14
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Xcode Version
+        run: |
+          sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+          xcodebuild -version
+
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: 'latest'
+
+      - name: Verify CMake Installation
+        run: cmake --version
+
+      - name: Setup Ruby and Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: false
+
+      - name: Install CocoaPods
+        run: |
+          gem install cocoapods
+          pod --version
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: |
+            sdks/ios/example/Pods
+            ~/.cocoapods/repos
+          key: ${{ runner.os }}-pods-${{ hashFiles('sdks/ios/example/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Install Third-Party Binaries
+        run: |
+          cd $(git rev-parse --show-toplevel)
+          chmod +x ./setup.sh
+          ./setup.sh --sdk ios
+
+      - name: Build NimbleNet.xcframework
+        run: |
+          cd $(git rev-parse --show-toplevel)
+          chmod +x ./sdks/ios/script/build-deliteAI-static.sh
+          ./sdks/ios/script/build-deliteAI-static.sh
+
+      - name: Install CocoaPods Dependencies
+        working-directory: sdks/ios/example
+        run: |
+          pod install --repo-update
+
+      - name: List Available Simulators
+        run: |
+          xcrun simctl list devices available
+
+      - name: Configure iOS test Secrets.xcconfig
+        env:
+          iOS_TEST_CLIENT_ID: ${{ secrets.iOS_TEST_CLIENT_ID }}
+          iOS_TEST_CLIENT_SECRET: ${{ secrets.iOS_TEST_CLIENT_SECRET }}
+          iOS_TEST_HOST: ${{ secrets.iOS_TEST_HOST }}
+        run: |
+          echo "CLIENT_ID=$iOS_TEST_CLIENT_ID" >> sdks/iOS/example/Secrets.xcconfig
+          echo "CLIENT_SECERT=$iOS_TEST_CLIENT_SECRET" >> sdks/iOS/example/Secrets.xcconfig
+          echo "HOST_URL=$iOS_TEST_HOST" >> sdks/iOS/example/Secrets.xcconfig
+
+
+      - name: Run Test
+        working-directory: sdks/ios/example
+        run: |
+          xcodebuild \
+            -workspace NimbleNetExample.xcworkspace \
+            -scheme NimbleNetExample_Tests \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.5' \
+            -only-testing:NimbleNetExample_Tests/runMethodInstrumentation \
+            test
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: |
+            sdks/ios/example/build/Logs/Test/
+            sdks/ios/example/TestResults/
+          retention-days: 30

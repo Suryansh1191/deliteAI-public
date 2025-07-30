@@ -15,7 +15,7 @@ class ProtoTest: XCTestCase {
         super.setUp()
  
         let config = NimbleNetConfig(
-            clientId: "testclient",
+            clientId: BundleConfig.clientId,
             clientSecret: BundleConfig.clientSecret,
             host: BundleConfig.host,
             deviceId: "ios-proto-test",
